@@ -1,0 +1,49 @@
+import math #calculadora simples escrita em python
+
+# Funções Matemáticas
+def somar(x, y): 
+    return x + y
+
+def subtrair(x, y): 
+    return x - y
+
+def multiplicar(x, y): 
+    return x * y
+
+def dividir(x, y): 
+    return x / y if y != 0 else "Erro: Divisão por zero"
+
+def calcular_potencia(x, y):
+    try:
+        return pow(x, y)
+    except Exception as e:
+        return f"Erro na potência: {e}"
+
+def raiz_enesima(x, y):
+    try:
+        if x < 0 and y % 2 == 0:
+            return "Erro: Raiz par de número negativo não é real."
+        return pow(x, 1/y)
+    except ZeroDivisionError:
+        return "Erro: Índice da raiz não pode ser zero."
+    except Exception as e:
+        return f"Erro na raiz: {e}"
+
+# Menu e Entrada
+print("--- Calculadora da Caravana ---")
+operacao = input("Digite a operação (soma, subtracao, divisao, multiplicar, raiz, potencia): ").strip().lower()
+
+try:
+    x = float(input("Digite o 1o membro: "))
+    y = float(input("Digite o 2o membro: "))
+
+    if operacao == 'soma': print(f"Resultado: {somar(x, y)}")
+    elif operacao == 'subtracao': print(f"Resultado: {subtrair(x, y)}")
+    elif operacao == 'multiplicar': print(f"Resultado: {multiplicar(x, y)}")
+    elif operacao == 'divisao': print(f"Resultado: {dividir(x, y)}")
+    elif operacao == 'potencia': print(f"Resultado: {calcular_potencia(x, y)}")
+    elif operacao == 'raiz': print(f"Resultado: {raiz_enesima(x, y)}")
+    else: print("Operação inválida!")
+except ValueError:
+    print("Erro: Por favor, digite apenas números válidos.")
+    
