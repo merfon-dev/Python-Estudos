@@ -1,0 +1,40 @@
+#transcritor do youtube 
+
+# Primeiro, você precisará instalar: pip install youtube-transcript-api
+
+from youtube_transcript_api import YouTubeTranscriptApi
+
+def transcrever_video(video_id):
+    try:
+        # Busca a transcrição
+        transcript = YouTubeTranscriptApi.get_transcript(video_id, languages=['pt', 'en', 'es'])
+        
+        # Junta tudo em um texto único e limpo
+        texto_completo = " ".join([item['text'] for item in transcript])
+        return texto_completo
+    
+    except Exception as e:
+        return f"Erro na transcrição: {e}"
+
+def retornar_id (url):
+    posicao = url.find("v=")
+    # Se ele achar o "v=", ele corta a partir daí + 2 caracteres
+    if posicao != -1:
+        id_completo = url[posicao + 2:]
+        
+        # pegamos apenas os primeiros 11 caracteres (tamanho padrão do ID)
+        return id_completo[:11]
+    else:
+        return "URL inválida"
+
+#a ação
+link_user = input ("insira URL: ")
+id_video = retornar_id(link_user)
+
+if id_video:
+    print (f"ID encontrado: {id_video}")
+    texto_final = transcrever_video(id_video)
+    print (f"Texto final: {texto_final}")
+
+else:
+    print ("ID não encontrado ou URL inválida")
