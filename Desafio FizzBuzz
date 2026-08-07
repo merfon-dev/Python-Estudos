@@ -1,0 +1,32 @@
+def fizzbuzz(n):
+
+    for numero in range(1, n+1):
+    # A ordem dos fatores altera o produto aqui!
+        if numero % 3 == 0 and numero % 5 == 0:
+            print("FizzBuzz")
+        
+        elif numero % 3 == 0:
+            print("Fizz")
+        
+        elif numero % 5 == 0:
+            print("Buzz")
+        
+        else:
+            print(numero)
+            
+
+def valida_numero(num): #checa se o número é válido
+    if num < 1:
+        print("o número deve ser maior que 1")
+        return False  # Avisa que a validação falhou
+    return True       # Avisa que a validação passou    
+
+
+try: #motor do código
+    numero = int(input("digite o número de intervalo: ")) 
+
+    if valida_numero(numero):
+        fizzbuzz (numero)
+
+except ValueError:
+    print ("entrada não válida")
