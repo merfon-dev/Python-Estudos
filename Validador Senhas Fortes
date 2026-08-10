@@ -1,0 +1,40 @@
+# Validador de senhas fortes
+
+def oito_caracteres(string_senha): #verifica se não há menos de 8 caracteres, sejam quais forem
+    if len(string_senha) <8:
+        return False
+    else:
+        return True
+        
+
+def letra_maiuscula(string_senha): #verifica se não há letra maiúscula
+    if not any(c.isupper() for c in string_senha):
+        return False
+    else:
+        return True
+
+        
+def numero_senha(string_senha): #verifica se não há numeral
+    if not any(c.isdigit() for c in string_senha):
+        return False
+    else:
+        return True
+
+        
+#motor do código: aqui começam as validações
+
+print("--- SISTEMA DE CADASTRO ---")
+senha = input("Crie sua senha. \nDeve conter os seguintes parâmetros: \n• Ao menos 8 caracteres, \n• Ao menos uma letra maiúscula \n• ao menos um caracter numérico: \n")
+
+try:
+    teste_tamanho = oito_caracteres(senha) #testa um de cada vez
+    teste_maiuscula = letra_maiuscula(senha)
+    teste_numero = numero_senha(senha)
+
+    if teste_tamanho and teste_maiuscula and teste_numero: #aqui garante q todos os testes retornam true
+        print("\nSenha válida e segura! \nCadastro realizado.")
+    else:
+        print("\nSenha inválida.\nCertifique-se de que ela tem pelo menos 8 caracteres, uma letra maiúscula e um número. \n Por favor, corrija os itens acima.")
+
+except Exception:
+    print("Ocorreu um erro inesperado durante o cadastro.")
