@@ -1,0 +1,18 @@
+#remover letras repetidas, caracteres especiais e espaços
+
+def remover_duplicadas(texto): # inclui só as que não tiverem sido ainda
+    resultado = ""
+    for letra in texto:
+        if letra not in resultado:
+            resultado += letra
+    return resultado
+
+import string
+
+# Tabela que troca tudo o que tem acento pela letra limpa
+tabela = str.maketrans("áàãâäéêëíìîïóòõôöúùûüçñ", "aaaaaeeeiiiiooooouuuucn")
+
+texto = input ("digite a palavra ou expressão: ")
+texto = texto.lower().strip().replace(" ", "").translate(tabela) #aqui, eliminamos os espaços e caracteres especiais 
+
+print(remover_duplicadas(texto))
