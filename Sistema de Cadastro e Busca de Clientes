@@ -1,0 +1,54 @@
+#Sistema de Cadastro e Busca de Clientes
+clientes = []
+
+def cadastra_clientes(nome_cliente, valor_compra):
+    cliente = {"nome_cliente": nome_cliente.lower().capitalize(), "compra": valor_compra}
+    clientes.append(cliente)
+
+def pega_valor_compra(cliente):# Retorna o número que o max() deve usar para comparar
+    return cliente["compra"]
+    
+def maior_comprador(clientes): #retorna quem fez a compra de maior valor
+    maior = max(clientes, key=pega_valor_compra)
+    return maior
+    
+def soma_compras(clientes): #soma_comprasoma todas as compras feitas
+    somador =0
+    for cliente in clientes:
+        somador += cliente["compra"] 
+    return somador       
+    
+#motor do código
+print("bem vindo!".upper())
+while True:
+    try:
+        nome_cliente = input("\nDigite o nome do cliente: ")
+        valor_compra = float(input("Digite o valor da compra: ")) 
+        if valor_compra<=0:
+            print("Entrada inválida! Valor nao poder ser 0 ou negativo")
+        else:    
+            cadastra_clientes(nome_cliente,valor_compra)
+    
+            opcao = input("Deseja cadastrar outro cliente? (S/N): ").upper()
+            if opcao == "N":
+                break
+    except ValueError:
+        print("Valor inválido! Tente novamente")
+
+if clientes:
+    print("\n" + "=" * 35)
+    print("\nRELATÓRIO GERAL DE VENDAS".center(35))
+    print("=" * 35)
+    
+    for c in clientes:
+        print(f"\nCliente: {c['nome_cliente']} | Compra: R$ {c['compra']:.2f}")
+        
+    total_vendido = soma_compras(clientes)
+    top_cliente = maior_comprador(clientes)
+    
+    print("-" * 35, "\n")
+    print(f"Total vendido: R$ {total_vendido:.2f} \n")
+    print(f"Maior comprador: {top_cliente['nome_cliente']} (R$ {top_cliente['compra']:.2f})")
+
+else:
+    print("\nNenhum cliente foi cadastrado.")            
